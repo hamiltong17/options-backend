@@ -1,14 +1,4 @@
-const TRADIER_API_TOKEN = 'gfKgLYNxBCRMFgXDiKZBHg1SKeBJ';
-const BASE_URL = 'https://api.tradier.com/v1/markets';
-
-const api = axios.create({
-	baseURL: BASE_URL,
-	headers: {
-	     Authorization: `Bearer ${TRADIER_API_TOKEN}`,
-	     Accept: 'application/json'
-	  },
-});
-
+const BACKEND_URL = 'https://options-backend-5qjv.onrender.com';
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('getOptionsBtn').addEventListener('click', async () => {
@@ -47,12 +37,34 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Failed to fetch data.');
     }
   });
+
+  document.getElementById('placeOrderBtn').addEventListener('click', async () => {
+    const symbol = document.getElementById('symbolInput').value.trim().toUpperCase();
+    if (!symbol) return alert('Enter a symbol before placing an order.');
+
+    const orderDetails = {
+      symbol,
+      option_symbol: 'AAPL240719C00150000', // Hardcoded for now; update this later
+      quantity: 1,
+      side: 'buy_to_open',
+      order_type: 'market',
+      duration: 'day'
+    };
+
+    const result = await placeOptionOrderProxy(orderDetails);
+
+    if (result) {
+      alert('✅ Order placed successfully!');
+    } else {
+      alert('❌ Failed to place order.');
+    }
+  });
 });
 
 async function getStockPrice(symbol) {
   const response = await fetch(`https://api.tradier.com/v1/markets/quotes?symbols=${symbol}`, {
     headers: {
-      Authorization: `Bearer ${TRADIER_API_TOKEN}`,
+      Authorization: 'Bearer gfKgLYNxBCRMFgXDiKZBHg1SKeBJ',
       Accept: 'application/json',
     }
   });
@@ -69,7 +81,7 @@ async function getExpirations(symbol) {
     `https://api.tradier.com/v1/markets/options/expirations?symbol=${symbol}&includeAllRoots=true&strikes=false`,
     {
       headers: {
-        Authorization: `Bearer ${TRADIER_API_TOKEN}`,
+        Authorization: 'Bearer gfKgLYNxBCRMFgXDiKZBHg1SKeBJ',
         Accept: 'application/json',
       }
     }
@@ -88,7 +100,7 @@ async function getOptionsChain(symbol, expiration) {
     `https://api.tradier.com/v1/markets/options/chains?symbol=${symbol}&expiration=${expiration}`,
     {
       headers: {
-        Authorization: `Bearer ${TRADIER_API_TOKEN}`,
+        Authorization: 'Bearer gfKgLYNxBCRMFgXDiKZBHg1SKeBJ',
         Accept: 'application/json',
       }
     }
@@ -216,30 +228,25 @@ function displayOptionsChain(options, currentPrice) {
   });
 }
 
+async function placeOptionOrderProxy(orderDetails) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/place-option-order`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderDetails),
+    });
 
-document.getElementById('placeOrderBtn').addEventListener('click', async () => {
-	const symbol = document.getElementById('symbolInput).value.trim().toUpperCase();
+    if (!response.ok) {
+      throw new Error('Order request failed');
+    }
 
-	const orderDetails = {
-		symbol,
-		option_symbol: 'AAPL240719C00150000',
-		quantity: 1,
-		side: 'buy_to_open',
-		order_type: 'market',
-		duration: 'day',
-};
-
-const result = await placeOptionOrderProxy(orderDetails);
-
-if (result) {
-  alert('Order placed successfully');
-
-} else {
-   alert('Failed to place order.');
-
-   }
-});
-
-
-
-
+    const data = await response.json();
+    console.log('Order response:', data);
+    return data;
+  } catch (error) {
+    console.error('Error placing order:', error);
+    return null;
+  }
+}

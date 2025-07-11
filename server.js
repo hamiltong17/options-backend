@@ -51,11 +51,11 @@ app.post('/place-option-order', async (req, res) => {
 
     res.json(response.data);
   } catch (error) {
-    console.error('❌ Order Error:', error.response?.data || error.message);
+    console.error('Order Error:', error.response?.data || error.message);
     res.status(500).json({ error: error.response?.data || error.message });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
