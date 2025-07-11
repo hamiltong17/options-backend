@@ -1,0 +1,44 @@
+import Foundation
+
+struct TradierAPI { 
+
+static let token = "gfKgLYNxBCRMFgXDiKZBHg1SKeBJ"
+static let baseURL = "https://api.tradier.com/v1"
+
+static func getQuote(for symbol: String) async throws -> Quote {
+	let url = URL(string: "\(baseURL)/markets/quotes?symbols=\(symbol)")!
+	let data = try await fetchData(from: url)
+	let response = try JSONDecoder().decode(QuoteResponse.self, from: data)
+	return response.quotes.quote
+}
+
+static func getExpirations(for symbol: String) async throw -> [String] {
+	let url = URL(string: "\(baseURL)/markets/options/expirations?symbol=\(symbol)&includeAllRoots=true&strikes=false")!
+	let data = try await fetchData(from: url)
+	let response = try JSONDecoder().decode(ExpirationResponse.self, from: data)
+	return response.expirations.date
+}
+
+static func getOptions(for symbol: String, expiration: String) async throws -> [OptionContract] {
+	let url = URL(string: "\(baseURL)/markets/options/chains?symbol=\(symbol)&expiration=\(expiration)")!
+	let data = try await fetchData(from: url)
+	let response = try JSONDecoder().decode(OptionsResponse.self, from: data)
+	return response.options.option
+   }
+
+private static func fetchData(from url: URL) async throws -> Data {
+	
+	var request = URLRequest(url: url)
+	request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+	request.setValue("application/json", forHTTPHeaderField: "Accept")
+
+	let (data, response) = try await URLSession.shared.data(for: request)
+	guard let httpRes = response as? HTTPURLResponse, httpRes.statusCode == 200 else {
+		throw URLError(.badServerResponse)
+         }
+
+         return data
+     }
+}
+
+

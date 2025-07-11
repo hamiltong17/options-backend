@@ -1,0 +1,5 @@
+Rate of  Increase  Formula: rate=amount of  increase/base         =(cell-cell 2)/cell
+
+Value after increase= base x percent for new value =b2 * percentage for new value (100)
+
+Percent for new value=base percent + percent of  increase =b11 * (Percentage + cell absolute($b$2) or percentage rate)

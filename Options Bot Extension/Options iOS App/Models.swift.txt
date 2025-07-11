@@ -1,0 +1,50 @@
+import Foundation
+
+struct QuoteResponse: Codable {
+	let quotes: QuoteWrapper
+}
+
+struct QuoteWrapper: Codable {
+	let quote: Quote
+}
+
+struct Quote: Codable {
+	let symbol: String
+	let last: Double
+	let bid: Double
+	let ask: Double
+	let change: Double
+	let change_percent: Double
+	let volume: Int
+}
+
+
+struct ExpirationResponse: Codable {
+	let expirations: ExpirationDates
+}
+
+struct ExpirationResponse: Codable {
+	let date: [String]
+}
+
+struct OptionsResponse: Codable {
+	let options: OptionList
+}
+
+struct OptionList: Codable {
+	let option: [OptionContract]
+}
+
+struct OptionContract: Codable, Identifiable {
+	var id: String { "\(symbol)-\(strike)-\(option_type)"}
+
+	let symbol: String
+	let strike: Double
+	let bid: Double
+	let ask: Double
+	let last: Double?
+	let volume: Int
+	let open_interest: Int
+	let expiration_date: String
+	let option_type: String
+}

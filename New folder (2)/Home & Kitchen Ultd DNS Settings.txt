@@ -1,0 +1,7 @@
+Home & Kitchen Ultd DNS Settings:
+
+SPF:v=spf1 include:mailgun.org ~all
+
+DKIM:mailo._domainkey.homekitchenultd.com/k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHWSoLRpdtw4ijKGjxTIktHpw/63D7l+YFmQjcHvStNhK3TfM4oXfGCRCUnO0girzEN0jhf3tiWI9C27nE6JUNHD/DWci8iZKWIiaBfVgR4eRgV0SNkB6Y1SKUg/3L62224Krq6zGGEPfsn+EehMm0mnFcbQI3hf+NqKXBpMSW5wIDAQAB
+
+DMARC:_dmarc.homekitchenultd.com/v=DMARC1; p=none

@@ -1,0 +1,12 @@
+Ethereum:
+
+To mine ether, you need to follow the following steps.
+-Create an Ethereum wallet.
+-Update your GPU drivers.
+-Install mining software.
+-Join a mining pool.
+-Hold onto your rewards.(Dont spend all of it)
+
+
+
+

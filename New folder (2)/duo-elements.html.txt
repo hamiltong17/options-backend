@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Duo-Elements HVAC Service</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f7f9;
+      color: #333;
+    }
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #023e8a;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      color: #0077b6;
+      margin-bottom: 1rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+    blockquote {
+      background: #caf0f8;
+      border-left: 5px solid #0077b6;
+      margin: 1rem 0;
+      padding: 1rem 1.5rem;
+      font-style: italic;
+      color: #023e8a;
+    }
+    footer {
+      background: #023e8a;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Duo-Elements HVAC Service</h1>
+  <p>Mastering the Elements of Comfort: Heat &amp; Chill, Perfectly Balanced</p>
+  <a href="#" class="cta-button">Get Your Free Estimate &rarr;</a>
+</header>
+
+<div class="container">
+
+  <section>
+    <h2>Why Choose Duo-Elements?</h2>
+    <ul>
+      <li>Dual-Zone Expertise: Customized heating and cooling for every part of your space.</li>
+      <li>Energy Efficient Solutions: Save on bills with smart, eco-friendly systems.</li>
+      <li>Reliable Service: Licensed, insured, and highly rated HVAC technicians.</li>
+      <li>24/7 Emergency Support: When the elements don’t cooperate, we’re here.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Our Services</h2>
+    <ul>
+      <li>Residential &amp; Commercial HVAC Installation</li>
+      <li>Maintenance &amp; Tune-Ups</li>
+      <li>Emergency Repairs</li>
+      <li>Smart Thermostat Installation &amp; Support</li>
+      <li>Indoor Air Quality Solutions</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Customer Testimonials</h2>
+    <blockquote>“Duo-Elements transformed my home’s comfort! Hot and cold zones work perfectly.” — Jessica M.</blockquote>
+    <blockquote>“Fast, professional, and knowledgeable. Highly recommend for any HVAC needs.” — David L.</blockquote>
+  </section>
+
+  <section>
+    <h2>Special Offer</h2>
+    <p><strong>Spring Tune-Up Special: 20% Off</strong><br />
+       Book your maintenance service before May 31st and keep your system running smoothly all year.</p>
+  </section>
+
+  <section>
+    <h2>Contact Us</h2>
+    <p>Call Now: (555) 123-4567<br />
+       Email: <a href="mailto:support@duo-elements.com">support@duo-elements.com</a></p>
+  </section>
+
+</div>
+
+<footer>
+  &copy; 2025 Duo-Elements HVAC Service | Privacy Policy | Terms of Service
+</footer>
+
+</body>
+</html>

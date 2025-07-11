@@ -1,0 +1,40 @@
+import Foundation
+
+class StockViewModel: ObservableObject {
+			    var symbol: String = ""
+			    var quote: Quote?
+			    var expirations: [String] = []
+			    var options: [OptionContract] = []
+
+	var currentPrice: Double? {
+	       quote?.last
+}
+
+var filteredOptions: [OptionContract] {
+	guard let price = currentPrice else { return [] }
+	let range: Double = 5
+	return options.filter { abs($0.strike - price) <= range }
+}
+
+func fetchData() async {
+      guard !symbol.isEmpty else { return }
+      do {
+		quote = try await TradierAPI.getQuote(for: symbol)
+		expirations = try await TradierAPI.getExpirations(for: symbol)
+		if let nearest = expirations.first {
+		    options = try await TradierAPI.getOptions(for: symbol, expiration: nearest)
+	}
+   } catch {
+	  print("Error fetching data: \(error)")
+   }
+
+}
+
+func fetchOptions(for expiration: String) async {
+       do {
+		options = try await TradierAPI.getOptions(for: symbol, expiration: expiration)
+	   } catch {
+		   print("Error fetching options: \(error)")
+	  }
+     }
+}

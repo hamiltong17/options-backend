@@ -1,0 +1,74 @@
+import SwiftUI
+
+struct ContentView: View {
+			   private var viewModel = StockViewModel()
+		private var selectedExpiration: String = ""
+
+	var body: some View {
+		NavigationView {
+			VStack(spacing: 16) {
+				TextField("Enter Symbol", text: $viewModel.symbol)
+					.textFieldStyle(RoundedBorderTextFieldStyle())
+					.padding()
+
+			Button("Get Stock Info") {
+				Task {
+					await viewModel.fetchData()
+			}
+	}
+	.buttonStyle(.borderedProminent)
+		
+	if let quote = viewModel.quote {
+		VStack(spacing: 16) {
+			TextField("Enter Symbol" , text: $viewModel.symbol)
+				.textFieldStyle(RoundedBorderTextFieldStyle())
+				.padding()
+
+			Button("Get Stock Info") {
+				Task {
+					await viewModel.fetchData()
+			}
+	}
+	.buttonStyle(.borderedProminent)
+	
+	if let quote = viewModel.quote {
+	    VStack(alignment: .leading, spacing: 8) {
+		  Text("\(quote.symbol) - $\(quote.last, specifier: "%.2f")")
+			 .font(.headline)
+		  Text("Bid: \(quote.bid), Ask: \(quote.ask)")
+		  Text("Volume: \(quote.volume)")
+		  Text("Change: \(quote.change) (\quote.change_percent)%)")
+	}.padding()
+}
+
+if !viewModel.expirations.isEmpty {
+	Picker("Expiration", selection: $selectedExpiration) {
+		ForEach(viewModel.expirations, id: \.self) { date in
+			Text(date).tag(date)
+	}
+}
+.pickerStyle(.menu)
+.onChange(of: selectedExpiration) { newValue in
+	Task {
+		await viewModel.fetchOptions(for: newValue)
+	  }
+     }
+}
+
+if !viewModel.filteredOptions.isEmpty {
+   List(viewModel.filteredOptions) { option in
+	VStack(alignment: .leading) {
+		Text("\(option.option_type.capitalized) - Strike: \(option.strike)")
+		Text("Bid: \(option.bid), Ask: \(option.ask), Volume: \(option.volume)")
+	     }
+         }
+     }
+
+     Spacer()
+}
+          .navigationTitle("Options Scout")
+          .padding()
+
+        }
+    }
+}

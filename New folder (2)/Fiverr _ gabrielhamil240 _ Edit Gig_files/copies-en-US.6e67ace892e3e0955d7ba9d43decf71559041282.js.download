@@ -1,0 +1,1 @@
+"undefined"==typeof i18n?setTimeout(function(){throw new Error("i18n is not defined")}):i18n.add({"en-US":{calendar:{header:{days:{previous:"Previous month",next:"Next month"},months:{previous:"Previous year",next:"Next year"},years:{previous:"Previous years",next:"Next years"}}}}});
