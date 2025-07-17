@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Options Bot</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h3>Options Bot</h3>
+
+  <input id="symbolInput" placeholder="Enter Symbol (e.g. AAPL)" />
+  <select id="expirationSelect">
+    <option value="">Select Expiration</option>
+  </select>
+
+  <select id="optionType">
+    <option value="call">Call</option>
+    <option value="put">Put</option>
+  </select>
+
+  <input id="strikePrice" placeholder="Strike Price (e.g. 150)" type="number" />
+  <input id="quantity" placeholder="Quantity (e.g. 1)" type="number" />
+  
+  <select id="orderType">
+    <option value="market">Market</option>
+    <option value="limit">Limit</option>
+  </select>
+
+  <input id="limitPrice" placeholder="Limit Price (if applicable)" type="number" />
+
+  <!-- Only one totalCost div -->
+  <div id="totalCost" style="margin:10px 0; font-weight:bold;"></div>
+
+  <button id="getOptionsBtn">Get Stock Info</button>
+  <button id="placeOrderBtn">Place Order</button>
+
+  <div id="results">Results will appear here...</div>
+  <div id="optionsResults"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+// script.js
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Smooth scroll to sections
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+  });
+
+  // Placeholder for order buttons
+  document.querySelectorAll(".order-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      alert("Ordering functionality coming soon with Plaid integration!");
+    });
+  });
+});

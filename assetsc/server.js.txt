@@ -1,0 +1,56 @@
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const plaid = require('plaid');
+require('dotenv').config();
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
+const client = new plaid.PlaidApi(
+  new plaid.Configuration({
+    basePath: plaid.PlaidEnvironments.sandbox,
+    baseOptions: {
+      headers: {
+        'PLAID-CLIENT-ID': process.env.PLAID_CLIENT_ID,
+        'PLAID-SECRET': process.env.PLAID_SECRET,
+      },
+    },
+  })
+);
+
+// Create Link Token
+app.post('/api/create_link_token', async (req, res) => {
+  try {
+    const response = await client.linkTokenCreate({
+      user: { client_user_id: 'user-123' },
+      client_name: 'Crunchies Snack Store',
+      products: ['auth'],
+      country_codes: ['US'],
+      language: 'en',
+      redirect_uri: '', // Optional for mobile
+    });
+    res.json({ link_token: response.data.link_token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error creating link token');
+  }
+});
+
+// Exchange Public Token for Access Token
+app.post('/api/exchange_public_token', async (req, res) => {
+  try {
+    const { public_token } = req.body;
+    const response = await client.itemPublicTokenExchange({ public_token });
+    const access_token = response.data.access_token;
+    res.json({ access_token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Token exchange failed');
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

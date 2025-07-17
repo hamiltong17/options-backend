@@ -1,0 +1,82 @@
+/* styles.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fffaf0, #f5e3da);
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #ff7f50;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.flavors-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.flavor-card {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flavor-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.flavor-card img {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.flavor-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ff7f50;
+}
+
+.flavor-desc {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.order-btn {
+  background-color: #ff7f50;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+  background-color: #e65c2f;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #ffe5d0;
+  font-size: 0.9rem;
+  color: #444;
+}

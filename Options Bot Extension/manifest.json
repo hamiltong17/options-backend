@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Options Viewer",
+  "description": "Fetch stock quotes and option chains using the Tradier API.",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "scripting",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://api.tradier.com/*",
+    "https://options-backend-5qjv.onrender.com/*"
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://api.tradier.com https://options-backend-5qjv.onrender.com wss://options-backend-5qjv.onrender.com;"
+  }
+}
